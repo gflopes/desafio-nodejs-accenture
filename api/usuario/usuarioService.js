@@ -74,7 +74,7 @@ const find = (req, res) => {
                             console.log("data_ultimo_login: " + usuario.data_ultimo_login)
                             console.log("diffMins: " + diffMins)
 
-                            if (diffMins < 30) {
+                            if (diffMins > 30) {
                                 return res.status(401).send({
                                     mensagem: "Sessão inválida."
                                 })

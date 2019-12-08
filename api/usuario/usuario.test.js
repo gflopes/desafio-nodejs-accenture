@@ -19,8 +19,7 @@ describe('POST /signup', function () {
             .post('/api/signup')
             .send({
                 email: "teste66@email.com.br",
-                "password": "Blblblblbl1$",
-                "confirm_password": "Blblblblbl1$",
+                "senha": "Blblblblbl1$",
                 cep: "22730290",
                 telefones: [{
                     ddd: "21",
@@ -36,13 +35,12 @@ describe('POST /signup', function () {
 });
 
 describe('POST /signup', function () {
-    it('teste da rota de signup, email inexistente / inválido / senha inválida / senhas não conferem, status code esperado => 400', function (done) {
+    it('teste da rota de signup, email inexistente / inválido / senha inválida, status code esperado => 400', function (done) {
         request(app)
             .post('/api/signup')
             .send({
                 email: "teste60@email.com.br",
-                password: "blblblb",
-                confirm_password: "blblblblbl",
+                senha: "blblblb",
                 cep: "22730290",
                 telefones: [{
                     ddd: "21",
@@ -63,7 +61,7 @@ describe('POST /login', function () {
             .post('/api/login')
             .send({
                 email: "teste65@email.com.br",
-                password: "Blblblblbl1$",
+                senha: "Blblblblbl1$",
             })
             .expect(200)
             .end(function (err, res) {
@@ -79,7 +77,7 @@ describe('POST /login', function () {
             .post('/api/login')
             .send({
                 email: "teste65@email.com.br",
-                password: "blblblblbl",
+                senha: "blblblblbl",
             })
             .expect(401)
             .end(function (err, res) {
@@ -95,7 +93,7 @@ describe('POST /login', function () {
             .post('/api/login')
             .send({
                 email: 'test@email.com.br',
-                password: 'blblblblblblbl'
+                senha: 'blblblblblblbl'
             })
             .expect(404)
             .end(function (err, res) {
@@ -111,7 +109,7 @@ describe('POST /login', function () {
             .post('/api/login')
             .send({
                 email: 'test@email.com.br',
-                password: 'blblblblbblblbl'
+                senha: 'blblblblbblblbl'
             })
             .expect(500)
             .end(function (err, res) {

@@ -6,7 +6,6 @@ const Geolocalizacao = require("../../util/geolocalizacao");
 const env = require("../../.env");
 
 const emailRegex = /\S+@\S+\.\S+/;
-const passwordRegex = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,12})/;
 
 const sendErrorsFromDB = (res, dbErrors) => {
   const mensagem = [];
@@ -18,7 +17,7 @@ const sendErrorsFromDB = (res, dbErrors) => {
 
 const login = (req, res) => {
   const email = req.body.email || "";
-  const password = req.body.password || "";
+  const senha = req.body.senha || "";
 
   Usuario.findOne({
       email
@@ -27,11 +26,11 @@ const login = (req, res) => {
       if (err) {
         return sendErrorsFromDB(res, err);
       } else if (usuario) {
-        if (bcrypt.compareSync(password, usuario.password)) {
+        if (bcrypt.compareSync(senha, usuario.senha)) {
           const {
             _id,
             email,
-            password,
+            senha,
             cep,
             telefones,
             geolocation,
@@ -53,7 +52,7 @@ const login = (req, res) => {
           return res.json({
             _id,
             email,
-            password,
+            senha,
             cep,
             telefones,
             geolocation,
@@ -78,8 +77,7 @@ const login = (req, res) => {
 
 const signup = (req, res, next) => {
   const email = req.body.email || "";
-  const password = req.body.password || "";
-  const confirmPassword = req.body.confirm_password || "";
+  const senha = req.body.senha || "";
   const cep = req.body.cep || "";
   const telefones = req.body.telefones;
 
@@ -89,20 +87,8 @@ const signup = (req, res, next) => {
     });
   }
 
-  if (!password.match(passwordRegex)) {
-    return res.status(400).send({
-      mensagem: "Senha precisar ter: uma letra maiúscula, uma letra minúscula, um número, uma caractere especial(@#$%) e tamanho entre 6-12."
-    });
-  }
-
   const salt = bcrypt.genSaltSync();
-  const passwordHash = bcrypt.hashSync(password, salt);
-
-  if (!bcrypt.compareSync(confirmPassword, passwordHash)) {
-    return res.status(400).send({
-      mensagem: "Senhas não conferem."
-    });
-  }
+  const senhaHash = bcrypt.hashSync(senha, salt);
 
   const token = jwt.sign({
       email: email
@@ -130,7 +116,7 @@ const signup = (req, res, next) => {
           const geolocation = JSON.parse(ret)
           const newUser = new Usuario({
             email,
-            password: passwordHash,
+            senha: senhaHash,
             cep,
             telefones,
             geolocation,
