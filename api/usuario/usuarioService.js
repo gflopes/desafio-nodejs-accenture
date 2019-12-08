@@ -32,7 +32,7 @@ const find = (req, res) => {
     console.log("id: " + req.params.id)
 
     let token = req.headers['authorization']
-    if (token.startsWith('Bearer ')) {
+    if (token && token.startsWith('Bearer ')) {
         token = token.slice(7, token.length);
     }
 
