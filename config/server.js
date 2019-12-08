@@ -1,4 +1,5 @@
-const porta = 5000
+const porta = process.env.PORT || 5000
+const host = process.env.HOST || '0.0.0.0'
 
 const bodyParser = require('body-parser')
 const express = require('express')
@@ -13,7 +14,7 @@ server.use(bodyParser.json())
 server.use(allowCors)
 server.use(queryParser())
 
-server.listen(porta, function () {
+server.listen(porta, host, function () {
     console.log(`API Desafio está rodando na porta ${porta}.`)
 })
 
