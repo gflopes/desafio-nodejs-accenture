@@ -1,0 +1,55 @@
+{
+  "name": "desafio-nodejs",
+  "version": "1.0.0",
+  "description": "API Desafio NodeJS",
+  "main": "loader.js",
+  "scripts": {
+    "dev": "nodemon",
+    "production": "pm2 start loader.js --name=api_desafio",
+    "test": "jest"
+  },
+  "author": "Gustavo Lopes",
+  "license": "ISC",
+  "jest": {
+    "globals": {
+      "addressTest": "http://localhost:3003",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJpYXQiOjE1MTYyMzkwMjJ9.KbjGYnxzo_CIQD5M_RJoQTsNtZLHHlc-z2sjNKT4yTA"
+    },
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "dependencies": {
+    "@google/maps": "^1.0.2",
+    "@types/google__maps": "^0.5.8",
+    "bcrypt": "^3.0.7",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-query-int": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.13",
+    "mongoose-paginate": "^5.0.3",
+    "node-restful": "^0.2.6",
+    "pm2": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "22.1.2",
+    "@types/supertest": "2.0.4",
+    "jest": "22.4.2",
+    "nodemon": "^2.0.1",
+    "supertest": "3.0.0",
+    "ts-jest": "22.0.4",
+    "typescript": "2.6.2"
+  }
+}
