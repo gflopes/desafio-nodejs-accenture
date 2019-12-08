@@ -29,14 +29,10 @@ function parseErrors(nodeRestfulErrors) {
 }
 
 const find = (req, res) => {
-    console.log("id: " + req.params.id)
-
     let token = req.headers['authorization']
     if (token && token.startsWith('Bearer ')) {
         token = token.slice(7, token.length);
     }
-
-    console.log("token: " + token)
 
     Usuario.findOne({
         token: token
