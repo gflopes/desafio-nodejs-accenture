@@ -64,9 +64,9 @@ const find = (req, res) => {
                             let diffMs = (today - usuario.data_ultimo_login);
                             let diffMins = Math.round((diffMs / 1000) / 60);
 
-                            console.log("today: " + today)
-                            console.log("data_ultimo_login: " + usuario.data_ultimo_login)
-                            console.log("diffMins: " + diffMins)
+                            // console.log("today: " + today)
+                            // console.log("data_ultimo_login: " + usuario.data_ultimo_login)
+                            // console.log("diffMins: " + diffMins)
 
                             if (diffMins < 30) {
                                 return res.status(401).send({
