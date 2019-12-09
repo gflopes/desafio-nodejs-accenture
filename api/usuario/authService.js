@@ -112,7 +112,7 @@ const signup = (req, res, next) => {
         Geolocalizacao.get({
           cep: cep
         }).then(ret => {
-          console.log("geolocalizacao retorno: " + ret)
+          //console.log("geolocalizacao retorno: " + ret)
           const geolocation = JSON.parse(ret)
           const newUser = new Usuario({
             email,
