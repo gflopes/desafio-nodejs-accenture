@@ -7,15 +7,15 @@ async function get(req) {
     return new Promise(resolve => {
         let geolocalizacao;
 
-        console.log("req: " + JSON.stringify(req.cep))
+        // console.log("req: " + JSON.stringify(req.cep))
 
         googleMapsClient.geocode({
                 address: JSON.stringify(req.cep)
             })
             .asPromise()
             .then((response) => {
-                console.log("location: " + JSON.stringify(response.json.results[0].geometry.location))
-                console.log("location_type: " + response.json.results[0].geometry.location_type)
+                // console.log("location: " + JSON.stringify(response.json.results[0].geometry.location))
+                // console.log("location_type: " + response.json.results[0].geometry.location_type)
 
                 const location_type = response.json.results[0].geometry.location_type
                 const latitude = JSON.stringify(response.json.results[0].geometry.location.lat)
@@ -28,7 +28,7 @@ async function get(req) {
                         longitude
                     ]
                 }
-                console.log("geolocalizacao: " + JSON.stringify(geolocalizacao))
+                // console.log("geolocalizacao: " + JSON.stringify(geolocalizacao))
 
                 resolve(JSON.stringify(geolocalizacao))
             })
