@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec sucrase-node loader.js",
     "production": "pm2 start loader.js --name=api_desafio",
-    "lint": "./node_modules/.bin/eslint src/*.js",
+    "lint": "./node_modules/.bin/eslint . --ext .js",
     "test": "jest"
   },
   "author": "Gustavo Lopes",
