@@ -1,11 +1,11 @@
-const googleMapsClient = require("@google/maps").createClient({
-    key: "AIzaSyBkkN9u_ANzi4EjbXZdUWhENZinNogMXlo",
+const googleMapsClient = require('@google/maps').createClient({
+    key: 'AIzaSyBkkN9u_ANzi4EjbXZdUWhENZinNogMXlo',
     Promise: Promise
-});
+})
 
 async function get(req) {
     return new Promise(resolve => {
-        let geolocalizacao;
+        let geolocalizacao
 
         // console.log("req: " + JSON.stringify(req.cep))
 
@@ -35,10 +35,10 @@ async function get(req) {
             .catch((err) => {
                 console.log(err)
                 resolve(err)
-            });
+            })
     })
 }
 
 module.exports = {
     get
-};
+}

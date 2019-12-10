@@ -8,8 +8,8 @@ module.exports = function (server) {
     api.get('/', function (req, res) {
         res.json({
             mensagem: 'Seja Bem-Vindo a API Desafio'
-        });
-    });
+        })
+    })
 
     const AuthService = require('../api/usuario/authService')
     const UsuarioService = require('../api/usuario/usuarioService')
