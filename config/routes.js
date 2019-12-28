@@ -1,13 +1,12 @@
 const express = require('express')
 
 module.exports = function (server) {
-
     const api = express.Router()
     server.use('/api', api)
 
     api.get('/', function (req, res) {
         res.json({
-            mensagem: 'Seja Bem-Vindo a API Desafio'
+            mensagem: 'Seja Bem-Vindo a API Desafio',
         })
     })
 

@@ -4,9 +4,9 @@ const Usuario = require('../../model/usuario')
 Usuario.methods(['get', 'post', 'put', 'delete'])
 Usuario.updateOptions({
   new: true,
-  runValidators: true
+  runValidators: true,
 })
-Usuario.after("get", sendErrorsOrNext)
+Usuario.after('get', sendErrorsOrNext)
 
 // tratamento de erros e parse das mensagens de erro devolvidos
 function sendErrorsOrNext(req, res, next) {
@@ -15,7 +15,7 @@ function sendErrorsOrNext(req, res, next) {
   if (bundle.errors) {
     var mensagem = parseErrors(bundle.errors)
     res.status(500).json({
-      mensagem
+      mensagem,
     })
   } else {
     next()
@@ -38,12 +38,12 @@ const find = (req, res) => {
   }
 
   Usuario.findOne({
-      token: token
+      token: token,
     },
     function (err, tokenEncontrado) {
       if (err) {
         res.status(500).json({
-          mensagem: err
+          mensagem: err,
         })
       } else {
         if (tokenEncontrado == null) {
@@ -54,7 +54,7 @@ const find = (req, res) => {
           Usuario.findById(req.params.id, function (err, usuario) {
             if (err) {
               return res.status(500).send({
-                mensagem: err
+                mensagem: err,
               })
             }
 
@@ -76,8 +76,31 @@ const find = (req, res) => {
                   mensagem: 'Sessão inválida.',
                 })
               }
+
+              const {
+                _id,
+                email,
+                senha,
+                cep,
+                telefones,
+                geolocation,
+                data_criacao,
+                data_atualizacao,
+                data_ultimo_login,
+                token,
+              } = usuario
+
               return res.status(200).json({
-                usuario
+                _id,
+                email,
+                senha,
+                cep,
+                telefones,
+                geolocation,
+                data_criacao,
+                data_atualizacao,
+                data_ultimo_login,
+                token,
               })
             }
           })
@@ -88,5 +111,5 @@ const find = (req, res) => {
 }
 
 module.exports = {
-  find
+  find,
 }

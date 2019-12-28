@@ -9,7 +9,7 @@ const server = express()
 
 server.use(
     bodyParser.urlencoded({
-        extended: true
+        extended: true,
     })
 )
 server.use(bodyParser.json())
