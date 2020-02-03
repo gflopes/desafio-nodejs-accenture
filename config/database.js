@@ -1,10 +1,31 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
-const url = process.env.MONGOLAB_URI ? process.env.MONGOLAB_URI : "mongodb://localhost/db_desafio";
-module.exports = mongoose.connect(url, {
+const options = {
     useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    poolSize: 5,
+    reconnectTries: 10,
+    reconnectInterval: 500,
+}
+
+const url = process.env.MONGOLAB_URI ?
+    process.env.MONGOLAB_URI :
+    'mongodb://localhost/db_desafio'
+
+mongoose.connect(url, options)
+
+mongoose.connection.on('error', err => {
+    console.log('Erro na conexão com o banco de dados: ' + err)
+})
+
+mongoose.connection.on('disconnected', err => {
+    console.log('API Desafio desconectada do banco de dados')
+})
+
+mongoose.connection.on('connected', err => {
+    console.log('API Desafio conectada do banco de dados')
 })
 
 mongoose.Error.messages.general.required = "O atributo '{PATH}' é obrigatório."
@@ -14,3 +35,5 @@ mongoose.Error.messages.Number.max =
     "O '{VALUE}' informado é maior que o limite máximo de '{MAX}'."
 mongoose.Error.messages.String.enum =
     "'{VALUE}' não é válido para o atributo '{PATH}'."
+
+module.exports = mongoose
